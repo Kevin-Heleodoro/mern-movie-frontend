@@ -1,13 +1,11 @@
 <a name="readme-top"></a>
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-backend">
-    <img src="img/readme/logo.png" alt="Logo" width="80" height="80">
+    <img src="src/img/readme/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">MERN Project Frontend</h3>
@@ -25,8 +23,6 @@
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -51,24 +47,20 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
+
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
 
 ### Built With
 
-* [![Node][Node.js]][Node-url]
-
+-   [![Node][Node.js]][Node-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
@@ -76,32 +68,35 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 Ensure you have the latest version of npm installed.
-  ```sh
-  npm install npm@latest -g
-  ```
+
+```sh
+npm install npm@latest -g
+```
+
 Ensure you have version 18.15.0 of node installed through NVM.
-  ```sh
-  nvm install 18.15.0
-  ```
+
+```sh
+nvm install 18.15.0
+```
+
 Ensure you have the latest version of yarn installed.
-  ```sh
-  npm install -g yarn
-  ```
+
+```sh
+npm install -g yarn
+```
 
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend.git
-   ```
+    ```sh
+    git clone https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend.git
+    ```
 2. Install NPM packages
-   ```sh
-   yarn install
-   ```
+    ```sh
+    yarn install
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES
 ## Usage
@@ -112,12 +107,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 ### Part 1
+
 <!-- - [x] Set up backend directory
 - [x] Install dependencies
 - [x] Create base api and dao files
@@ -131,8 +126,8 @@ See the [open issues](https://github.khoury.northeastern.edu/NEU-CS5610-SU23/Kev
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- CONTACT -->
+
 ## Contact
 
 Your Name - [@Golden_Sun_Kev](https://twitter.com/Golden_Sun_Kev) - heleodoro.k@northeastern.edu
@@ -141,23 +136,19 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* [README badges](https://dev.to/envoy_/150-badges-for-github-pnk)
-<!-- * []() -->
-<!-- * []() -->
+-   [README badges](https://dev.to/envoy_/150-badges-for-github-pnk)
+    <!-- * []() -->
+    <!-- * []() -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/kevin-heleodoro
-
-
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
 [Node-url]: https://nodejs.org/en
