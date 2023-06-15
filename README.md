@@ -113,6 +113,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ### Part 1
 
+-   installed react and dependencies
+-
+
 <!-- - [x] Set up backend directory
 - [x] Install dependencies
 - [x] Create base api and dao files
