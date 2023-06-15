@@ -114,7 +114,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### Part 1
 
 -   installed react and dependencies
--
+-   created template for App.js
+-   create MovieDataService
 
 <!-- - [x] Set up backend directory
 - [x] Install dependencies
