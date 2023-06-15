@@ -99,7 +99,90 @@ const MoviesList = (props) => {
         setSearchRating(searchRating);
     };
 
-    return <div className="App">Placeholder text for MoviesList</div>;
+    return (
+        <div className="App">
+            <Container className="main-container">
+                <Form>
+                    <Row>
+                        <Col>
+                            <Form.Group className="mb-3">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search by title"
+                                    value={searchTitle}
+                                    onChange={onChangeSearchTitle}
+                                />
+                            </Form.Group>
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={findByTitle}
+                            >
+                                Search
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3">
+                                <Form.Control
+                                    as="select"
+                                    onChange={onChangeSearchRating}
+                                >
+                                    {ratings.map((rating, i) => {
+                                        return (
+                                            <option value={rating} key={i}>
+                                                {rating}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Control>
+                            </Form.Group>
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={findByRating}
+                            >
+                                Search
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
+                <Row className="movieRow">
+                    {movies.map((movie) => {
+                        return (
+                            <Col key={movie._id}>
+                                <Card className="moviesListCard">
+                                    <Card.Img
+                                        className="smallPoster"
+                                        src={movie.poster + '/100px180'}
+                                    />
+                                    <Card.Body>
+                                        <Card.Title>{movie.title}</Card.Title>
+                                        <Card.Text>
+                                            Rating: {movie.rated}
+                                        </Card.Text>
+                                        <Card.Text>{movie.plot}</Card.Text>
+                                        <Link to={'/movies/' + movie._id}>
+                                            View Reviews
+                                        </Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        );
+                    })}
+                </Row>
+                <br />
+                Showing page: {currentPage + 1}.
+                <Button
+                    variant="link"
+                    onClick={() => {
+                        setCurrentPage(currentPage + 1);
+                    }}
+                >
+                    Get next {entriesPerPage} results{' '}
+                </Button>
+            </Container>
+        </div>
+    );
 };
 
 export default MoviesList;
