@@ -10,6 +10,8 @@ import Card from 'react-bootstrap/Card';
 
 import './MoviesList.css';
 
+const DEFAULT_IMAGE = require('../img/default-poster.png');
+
 const MoviesList = (props) => {
     const [movies, setMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
@@ -154,6 +156,9 @@ const MoviesList = (props) => {
                                     <Card.Img
                                         className="smallPoster"
                                         src={movie.poster + '/100px180'}
+                                        onError={(e) => {
+                                            e.target.src = DEFAULT_IMAGE;
+                                        }}
                                     />
                                     <Card.Body>
                                         <Card.Title>{movie.title}</Card.Title>

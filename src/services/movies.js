@@ -1,22 +1,24 @@
 import axios from 'axios';
 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 class MovieDataService {
     getAll(page = 0) {
-        return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?page=${page}`
-        );
+        return axios.get(`${BASE_URL}/api/v1/movies?page=${page}`);
+    }
+
+    getOne(id) {
+        return axios.get(`${BASE_URL}/api/v1/movies/id/${id}`);
     }
 
     find(query, by = 'title', page = 0) {
         return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?${by}=${query}&page=${page}`
+            `${BASE_URL}/api/v1/movies?${by}=${query}&page=${page}`
         );
     }
 
     getRatings() {
-        return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/ratings`
-        );
+        return axios.get(`${BASE_URL}/api/v1/movies/ratings`);
     }
 }
 
