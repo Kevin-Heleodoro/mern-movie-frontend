@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
 // eslint-disable-next-line jest/no-mocks-import
 import mockServer from '../__mocks__/mockServer';
-// const mockServer = jest.mock('../__mocks__/mockServer');
 
 beforeAll(() => mockServer.listen());
 afterEach(() => mockServer.resetHandlers());
