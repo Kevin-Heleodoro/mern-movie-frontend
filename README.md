@@ -133,6 +133,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ![Home-Page-Screenshot][Home-Page-Screenshot]
 ![One-Movie-Screenshot][One-Movie-Screenshot]
 ![One-Movie-Default-Screenshot][One-Movie-Default-Screenshot]
+![Test-Screenshot][Test-Screenshot]
 
 <!-- - [x] Set up backend directory
 - [x] Install dependencies
@@ -178,3 +179,4 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 [Home-Page-Screenshot]: src/img/readme/home_page_screenshot.png
 [One-Movie-Screenshot]: src/img/readme/one_movie_screenshot.png
 [One-Movie-Default-Screenshot]: src/img/readme/one_move_default_poster_screenshot.png
+[Test-Screenshot]: src/img/readme/test_screenshot.png
