@@ -30,6 +30,32 @@ const mockMovieResponse = {
     entries_per_page: 20,
     total_results: 2,
 };
+const mockOneMovieResponse = {
+    _id: '573a1390f29313caabcd42e8',
+    title: 'The Great Train Robbery',
+    plot: 'A group of bandits stage a brazen train hold-up, only to find a determined posse hot on their heels.',
+    fullplot:
+        "Among the earliest existing films in American cinema - notable as the first film that presented a narrative story to tell - it depicts a group of cowboy outlaws who hold up a train and rob the passengers. They are then pursued by a Sheriff's posse. Several scenes have color included - all hand tinted.",
+    rated: 'TV-G',
+    reviews: [
+        {
+            _id: '64890f87b334a6f5dc6bf8e4',
+            name: 'Test User',
+            user_id: '4321',
+            date: '2023-06-14T01:13:07.823Z',
+            review: 'It was awesome!!!!!',
+            movie_id: '573a1390f29313caabcd42e8',
+        },
+        {
+            _id: '64890f87b334a6f5dc6bf8e5',
+            name: 'Test User',
+            user_id: '4321',
+            date: '2023-06-14T00:53:27.319Z',
+            review: 'This is the worst movie!',
+            movie_id: '573a1390f29313caabcd42e8',
+        },
+    ],
+};
 
 const mockServer = setupServer(
     rest.get(`${API_URL}/api/v1/movies/ratings`, (_, res, ctx) => {
@@ -37,6 +63,10 @@ const mockServer = setupServer(
     }),
     rest.get(`${API_URL}/api/v1/movies`, (_, res, ctx) => {
         return res(ctx.status(200), ctx.json(mockMovieResponse));
+    }),
+    rest.get(`${API_URL}/api/v1/movies/id/:id`, (req, res, ctx) => {
+        console.log(req.params.id);
+        return res(ctx.status(200), ctx.json(mockOneMovieResponse));
     })
 );
 
