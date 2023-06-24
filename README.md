@@ -56,6 +56,7 @@
 ### Built With
 
 -   [![Node][Node.js]][Node-url]
+-   [![Jest][Jest]][Jest-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -95,6 +96,12 @@ npm install -g yarn
     ```sh
     yarn install
     ```
+3. Start frontend server\*\*
+    ```sh
+    yarn start
+    ```
+
+\*\* Ensure that you have the backend server running so data can be fetched.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,9 +120,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ### Part 1
 
--   installed react and dependencies
--   created template for App.js
--   create MovieDataService
+-   [x] Installed React and dependencies
+-   [x] Created the following Components
+    -   Movie
+    -   MoviesList
+-   [x] Create MovieDataService to handle HTTP requests
+-   [x] Created a mock server and the following tests
+    -   App.test
+    -   Movie.test
+    -   MoviesList.test
+
+![Home-Page-Screenshot][Home-Page-Screenshot]
+![One-Movie-Screenshot][One-Movie-Screenshot]
+![One-Movie-Default-Screenshot][One-Movie-Default-Screenshot]
 
 <!-- - [x] Set up backend directory
 - [x] Install dependencies
@@ -145,7 +162,7 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 ## Acknowledgments
 
 -   [README badges](https://dev.to/envoy_/150-badges-for-github-pnk)
-    <!-- * []() -->
+-   [Memory Router](https://reactrouter.com/en/main/router-components/memory-router)
     <!-- * []() -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -156,3 +173,8 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 [linkedin-url]: https://linkedin.com/in/kevin-heleodoro
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
 [Node-url]: https://nodejs.org/en
+[Jest]: https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white
+[Jest-url]: https://jestjs.io/
+[Home-Page-Screenshot]: src/img/readme/home_page_screenshot.png
+[One-Movie-Screenshot]: src/img/readme/one_movie_screenshot.png
+[One-Movie-Default-Screenshot]: src/img/readme/one_move_default_poster_screenshot.png
