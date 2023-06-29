@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MovieDataService from '../services/movies';
-import { useParams } from 'react-router-dom';
-import { Card, Container, Image, Col, Row } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Card, Container, Image, Col, Row, Button } from 'react-bootstrap';
+import moment from 'moment';
 
 import './Movie.css';
 
 const DEFAULT_IMAGE = require('../img/default-poster.png');
 
-const Movie = (props) => {
+const Movie = ({ user }) => {
     let params = useParams();
     const [movie, setMovie] = useState({
         id: null,
@@ -47,6 +48,13 @@ const Movie = (props) => {
                             <Card.Header as="h5">{movie.title}</Card.Header>
                             <Card.Body>
                                 <Card.Text>{movie.plot}</Card.Text>
+                                {user && (
+                                    <Link
+                                        to={'/movies/' + params.id + '/review'}
+                                    >
+                                        Add Review
+                                    </Link>
+                                )}
                             </Card.Body>
                         </Card>
                         <h2>Reviews</h2>
@@ -56,16 +64,46 @@ const Movie = (props) => {
                                 <div className="d-flex" key={index}>
                                     <div className="flex-shrink-0 reviewsText">
                                         <h5>
-                                            {review.name +
-                                                ' reviewed on ' +
-                                                new Date(
-                                                    review.date
-                                                ).toLocaleDateString() +
-                                                ':'}
+                                            {review.name + ' reviewed on '}{' '}
+                                            {moment(review.date).format(
+                                                'Do MMMM YYYY'
+                                            )}
                                         </h5>
                                         <p className="review">
                                             {review.review}
                                         </p>
+                                        {user &&
+                                            user.googleId ===
+                                                review.user_id && (
+                                                <Row>
+                                                    <Col>
+                                                        <Link
+                                                            to={{
+                                                                pathname:
+                                                                    '/movies/' +
+                                                                    params.id +
+                                                                    '/review/',
+                                                            }}
+                                                            state={{
+                                                                currentReview:
+                                                                    review,
+                                                            }}
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                    </Col>
+                                                    <Col>
+                                                        <Button
+                                                            variant="link"
+                                                            onClick={() => {
+                                                                // TODO: Delete review
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            )}
                                     </div>
                                 </div>
                             );

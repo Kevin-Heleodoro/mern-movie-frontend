@@ -20,6 +20,10 @@ class MovieDataService {
     getRatings() {
         return axios.get(`${BASE_URL}/api/v1/movies/ratings`);
     }
+
+    createReview(data) {
+        return axios.post(`${BASE_URL}/api/v1/movies/review`, data);
+    }
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowNew": true}] */
