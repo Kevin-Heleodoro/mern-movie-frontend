@@ -57,6 +57,8 @@
 
 -   [![Node][Node.js]][Node-url]
 -   [![Jest][Jest]][Jest-url]
+-   [![React][React]][React-url]
+-   [![Google-Cloud][Google-Cloud]][Google-Cloud-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,6 +120,26 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
+### Part 2
+
+-   [x] Added Google OAuthentication
+-   [x] Logic for authenticated users to:
+    -   Add Reviews
+    -   Edit Reviews
+    -   Delete Reviews
+
+<p align="center">Add Review</p>
+
+![Add-Review-Screenshot][Add-Review-Screenshot]
+
+<p align="center">Edit Review</p>
+
+![Edit-Review-Screenshot][Edit-Review-Screenshot]
+
+<p align="center">Delete Review</p>
+
+![Delete-Review-Screenshot][Delete-Review-Screenshot]
+
 ### Part 1
 
 -   [x] Installed React and dependencies
@@ -134,15 +156,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ![One-Movie-Screenshot][One-Movie-Screenshot]
 ![One-Movie-Default-Screenshot][One-Movie-Default-Screenshot]
 ![Test-Screenshot][Test-Screenshot]
-
-<!-- - [x] Set up backend directory
-- [x] Install dependencies
-- [x] Create base api and dao files
-- [x] Restore dump file for movies database
-
-![Directory Structure][backend-structure-screenshot]
-
-![MongoDB Compass][mongo-restore-compass-screenshot] -->
 
 See the [open issues](https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend/issues) for a full list of proposed features (and known issues).
 
@@ -176,7 +189,14 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 [Node-url]: https://nodejs.org/en
 [Jest]: https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white
 [Jest-url]: https://jestjs.io/
+[React]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://react.dev/
+[Google-Cloud]: https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white
+[Google-Cloud-url]: https://cloud.google.com/
 [Home-Page-Screenshot]: src/img/readme/home_page_screenshot.png
 [One-Movie-Screenshot]: src/img/readme/one_movie_screenshot.png
 [One-Movie-Default-Screenshot]: src/img/readme/one_move_default_poster_screenshot.png
 [Test-Screenshot]: src/img/readme/test_screenshot.png
+[Add-Review-Screenshot]: src/img/readme/add_review_screenshot.png
+[Edit-Review-Screenshot]: src/img/readme/edit_review_screenshot.png
+[Delete-Review-Screenshot]: src/img/readme/delete_review_screenshot.png
