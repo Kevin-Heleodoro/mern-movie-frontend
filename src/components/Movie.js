@@ -27,6 +27,22 @@ const Movie = ({ user }) => {
         getMovie(params.id);
     }, [params.id]);
 
+    const handleDelete = (review, index) => {
+        var data = {
+            review_id: review._id,
+            user_id: user.googleId,
+        };
+
+        MovieDataService.deleteReview(data);
+
+        setMovie((prevState) => {
+            prevState.reviews.splice(index, 1);
+            return {
+                ...prevState,
+            };
+        });
+    };
+
     return (
         <div>
             <Container>
@@ -95,9 +111,12 @@ const Movie = ({ user }) => {
                                                     <Col>
                                                         <Button
                                                             variant="link"
-                                                            onClick={() => {
-                                                                // TODO: Delete review
-                                                            }}
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    review,
+                                                                    index
+                                                                )
+                                                            }
                                                         >
                                                             Delete
                                                         </Button>
