@@ -24,6 +24,10 @@ class MovieDataService {
     createReview(data) {
         return axios.post(`${BASE_URL}/api/v1/movies/review`, data);
     }
+
+    editReview(data) {
+        return axios.put(`${BASE_URL}/api/v1/movies/review`, data);
+    }
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowNew": true}] */
