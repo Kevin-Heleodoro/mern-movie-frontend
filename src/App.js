@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { Navbar, Nav } from 'react-bootstrap';
 
+import FavoriteDataService from './services/favorites';
 import MoviesList from './components/MoviesList';
 import Movie from './components/Movie';
 import Login from './components/Login';
@@ -27,6 +28,31 @@ function App() {
         setFavorites(favorites.filter((f) => f !== movieId));
     };
 
+    const retrieveFavorites = useCallback(() => {
+        if (user) {
+            FavoriteDataService.getAll(user.googleId)
+                .then((response) => {
+                    setFavorites(response.data.favorites);
+                })
+                .catch((e) => console.log(e));
+        }
+    }, [user]);
+
+    const updateFavorites = useCallback(() => {
+        if (user) {
+            const data = {
+                _id: user.googleId,
+                favorites,
+            };
+
+            FavoriteDataService.updateFavorites(data)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((e) => console.log(e));
+        }
+    }, [user, favorites]);
+
     useEffect(() => {
         let loginData = JSON.parse(localStorage.getItem('login'));
 
@@ -43,6 +69,14 @@ function App() {
             }
         }
     }, []);
+
+    useEffect(() => {
+        retrieveFavorites();
+    }, [retrieveFavorites]);
+
+    useEffect(() => {
+        updateFavorites();
+    }, [updateFavorites]);
 
     return (
         <GoogleOAuthProvider clientId={clientId}>

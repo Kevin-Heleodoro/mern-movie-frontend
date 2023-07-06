@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 
 import MovieDataService from '../services/movies';
+import FavoriteDataService from '../services/favorites';
 import './MoviesList.css';
 
 const DEFAULT_IMAGE = require('../img/default-poster.png');
@@ -193,15 +194,25 @@ const MoviesList = ({ user, addFavorite, deleteFavorite, favorites }) => {
                     })}
                 </Row>
                 <br />
-                Showing page: {currentPage + 1}.
-                <Button
-                    variant="link"
-                    onClick={() => {
-                        setCurrentPage(currentPage + 1);
-                    }}
-                >
-                    Get next {entriesPerPage} results{' '}
-                </Button>
+                <div className="pagination">
+                    <Button
+                        variant="link"
+                        onClick={() => {
+                            setCurrentPage(currentPage - 1);
+                        }}
+                    >
+                        Get previous {entriesPerPage} results{' '}
+                    </Button>
+                    Showing page: {currentPage + 1}
+                    <Button
+                        variant="link"
+                        onClick={() => {
+                            setCurrentPage(currentPage + 1);
+                        }}
+                    >
+                        Get next {entriesPerPage} results{' '}
+                    </Button>
+                </div>
             </Container>
         </div>
     );
