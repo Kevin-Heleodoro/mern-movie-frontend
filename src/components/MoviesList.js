@@ -9,7 +9,6 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 
 import MovieDataService from '../services/movies';
-import FavoriteDataService from '../services/favorites';
 import './MoviesList.css';
 
 const DEFAULT_IMAGE = require('../img/default-poster.png');

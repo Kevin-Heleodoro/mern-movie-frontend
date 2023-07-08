@@ -120,6 +120,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
+### Part 3
+
+-   [x] Added Favorites functionality
+
+<p align="center">Home Page</p>
+
+![Home-Page-Favorites-Screenshot][Home-Page-Favorites-Screenshot]
+
+<p align="center">Favorites Collection</p>
+
+![Mongo-Favorites-Screenshot][Mongo-Favorites-Screenshot]
+
 ### Part 2
 
 -   [x] Added Google OAuthentication
@@ -200,3 +212,5 @@ Project Link: [https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleo
 [Add-Review-Screenshot]: src/img/readme/add_review_screenshot.png
 [Edit-Review-Screenshot]: src/img/readme/edit_review_screenshot.png
 [Delete-Review-Screenshot]: src/img/readme/delete_review_screenshot.png
+[Home-Page-Favorites-Screenshot]: src/img/readme/homepage_favorites_screenshot.png
+[Mongo-Favorites-Screenshot]: src/img/readme/mongo_favorites_screenshot.png
