@@ -17,7 +17,7 @@
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://movietime-frontend-kheleodoro.uw.r.appspot.com">View Demo</a>
+    <a href="https://movietime-frontend-heleo.uw.r.appspot.com">View Demo</a>
     ·
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend/issues">Report Bug</a>
     ·
