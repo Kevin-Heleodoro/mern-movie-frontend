@@ -4,20 +4,21 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-backend">
+  <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend">
     <img src="src/img/readme/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">MERN Project Frontend</h3>
 
   <p align="center">
-    This project serves as the front end for the MERN Project. It will communicate with the backend and serve data to the client. There will be multiple stages of the implementation of the backend which will be documented in chronological order.
+    This project serves as the front end for the MERN Project. It will communicate with the backend and serve data to the client. There will be multiple stages of the implementation of the frontend which will be documented in chronological order.
+    Link to backend: <https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-backend>
     <br />
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <!-- <a href="https://github.com/github_username/repo_name">View Demo</a>
-    · -->
+    <a href="https://movietime-frontend-kheleodoro.uw.r.appspot.com">View Demo</a>
+    ·
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend/issues">Report Bug</a>
     ·
     <a href="https://github.khoury.northeastern.edu/NEU-CS5610-SU23/KevinHeleodoro-frontend/issues">Request Feature</a>
@@ -120,7 +121,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-### Part 3
+### Part 6
+
+-   [x] Deployed frontend to Google Cloud.
+
+### Part 5
 
 -   [x] Added Favorites functionality
 
@@ -132,7 +137,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ![Mongo-Favorites-Screenshot][Mongo-Favorites-Screenshot]
 
-### Part 2
+### Part 4
 
 -   [x] Added Google OAuthentication
 -   [x] Logic for authenticated users to:
@@ -152,7 +157,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ![Delete-Review-Screenshot][Delete-Review-Screenshot]
 
-### Part 1
+### Part 3
 
 -   [x] Installed React and dependencies
 -   [x] Created the following Components

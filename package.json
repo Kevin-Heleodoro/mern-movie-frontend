@@ -22,7 +22,8 @@
     },
     "scripts": {
         "start": "BROWSER=none react-scripts start",
-        "build": "react-scripts build",
+        "build": "NODE_ENV=production react-scripts build",
+        "build:dev": "NODE_ENV=development react-scripts build",
         "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
         "eject": "react-scripts eject"
     },
