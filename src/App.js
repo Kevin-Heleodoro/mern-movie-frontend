@@ -7,7 +7,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 import FavoriteDataService from './services/favorites';
 import MoviesList from './components/MoviesList';
-import FavoritesList from './components/FavoritesList';
+import FavoritesList from './components/FavoritesList/FavoritesList';
 import Movie from './components/Movie';
 import Login from './components/Login';
 import Logout from './components/Logout';
