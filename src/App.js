@@ -7,6 +7,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 import FavoriteDataService from './services/favorites';
 import MoviesList from './components/MoviesList';
+import FavoritesList from './components/FavoritesList';
 import Movie from './components/Movie';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -97,6 +98,13 @@ function App() {
                                 <Nav.Link as={Link} to="/movies">
                                     Movies
                                 </Nav.Link>
+                                {user ? (
+                                    <Nav.Link as={Link} to="/favorites">
+                                        Favorites
+                                    </Nav.Link>
+                                ) : (
+                                    ''
+                                )}
                             </Nav>
                         </Navbar.Collapse>
                         {user ? (
@@ -141,6 +149,13 @@ function App() {
                         exact
                         path="/movies/:id/review"
                         element={<AddReview user={user} />}
+                    />
+                    <Route
+                        exact
+                        path="/favorites"
+                        element={
+                            <FavoritesList user={user} favorites={favorites} />
+                        }
                     />
                 </Routes>
             </div>

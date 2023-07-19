@@ -121,6 +121,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
+### Part 7
+
 ### Part 6
 
 -   [x] Deployed frontend to Google Cloud.
