@@ -6,41 +6,22 @@ import FavoriteDataService from '../../services/favorites';
 import './FavoritesList.css';
 import { DndCard } from './DndCard';
 
-const FavoritesList = ({ user, favorites }) => {
-    // Implement calls to the backend to gather movie title and poster from api.
+const DEFAULT_IMAGE = require('../../img/default-poster.png');
 
-    // const [cards, setCards] = useState(favorites);
+const FavoritesList = ({ user, favorites, updateFavorites }) => {
+    const [favoriteRanking, setFavoriteRanking] = useState(favorites);
+    const [cards, setCards] = useState([]);
 
-    const [cards, setCards] = useState([
-        {
-            id: 1,
-            text: 'Write a cool JS library',
-        },
-        {
-            id: 2,
-            text: 'Make it generic enough',
-        },
-        {
-            id: 3,
-            text: 'Write README',
-        },
-        {
-            id: 4,
-            text: 'Create some examples',
-        },
-        {
-            id: 5,
-            text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
-        },
-        {
-            id: 6,
-            text: '???',
-        },
-        {
-            id: 7,
-            text: 'PROFIT',
-        },
-    ]);
+    useEffect(() => {
+        var data = {
+            ids: [...favorites],
+        };
+        MovieDataService.collectFavorites(data)
+            .then((response) => {
+                setCards(response.data);
+            })
+            .catch((e) => console.log(e));
+    }, []);
 
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         setCards((prevCards) =>
@@ -51,16 +32,17 @@ const FavoritesList = ({ user, favorites }) => {
                 ],
             })
         );
+        // updateFavorites();
     }, []);
 
     const renderCard = useCallback((card, index) => {
-        console.table({ card, index });
-
         return (
             <DndCard
-                key={index}
+                key={card._id}
                 index={index}
-                id={card.movieId}
+                id={card._id}
+                title={card.title}
+                poster={card.poster ? card.poster : DEFAULT_IMAGE}
                 moveCard={moveCard}
             />
         );
@@ -71,7 +53,7 @@ const FavoritesList = ({ user, favorites }) => {
             <div className="favoritesContainer container">
                 <div className="favoritesPanel">Drag to Rank</div>
                 <div className="favoritesRankOrder">
-                    {cards.map((card, i) => renderCard(card, i))}
+                    {cards && cards.map((card, i) => renderCard(card, i))}
                 </div>
             </div>
         </>

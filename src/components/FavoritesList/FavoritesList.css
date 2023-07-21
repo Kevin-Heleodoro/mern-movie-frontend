@@ -3,7 +3,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    border: 1px red solid;
+}
+.favoritesCardHolder {
+    padding: 10px;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    cursor: move;
+    opacity: 1;
 }
 .favoritesPoster {
     width: 150px;

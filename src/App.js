@@ -154,7 +154,20 @@ function App() {
                         exact
                         path="/favorites"
                         element={
-                            <FavoritesList user={user} favorites={favorites} />
+                            user ? (
+                                <FavoritesList
+                                    user={user}
+                                    favorites={favorites}
+                                    updateFavorites={updateFavorites}
+                                />
+                            ) : (
+                                <MoviesList
+                                    user={user}
+                                    addFavorite={addFavorite}
+                                    deleteFavorite={deleteFavorite}
+                                    favorites={favorites}
+                                />
+                            )
                         }
                     />
                 </Routes>

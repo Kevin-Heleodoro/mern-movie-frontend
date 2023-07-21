@@ -19,6 +19,11 @@ class MovieDataService {
         return axios.get(`${BASE_URL}/ratings`);
     }
 
+    collectFavorites(data) {
+        console.log(data);
+        return axios.post(`${BASE_URL}/collection`, data);
+    }
+
     createReview(data) {
         return axios.post(`${BASE_URL}/review`, data);
     }
