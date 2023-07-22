@@ -12,6 +12,8 @@ const style = {
     cursor: 'move',
 };
 
+const DEFAULT_IMAGE = require('../../img/default-poster.png');
+
 export const DndCard = memo(function ({
     id,
     title,
@@ -70,6 +72,7 @@ export const DndCard = memo(function ({
                         src={poster + '/100px180'}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
+                            currentTarget.src = DEFAULT_IMAGE;
                         }}
                     />
                 </div>

@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import { Navbar, Nav } from 'react-bootstrap';
 
 import FavoriteDataService from './services/favorites';
+import MovieDataService from './services/movies';
+
 import MoviesList from './components/MoviesList';
 import FavoritesList from './components/FavoritesList/FavoritesList';
 import Movie from './components/Movie';
@@ -20,6 +22,8 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
+    const [favoritesDetails, setFavoritesDetails] = useState([]);
+    const [saveFavorites, setSaveFavorites] = useState(false);
 
     const addFavorite = (movieId) => {
         setFavorites([...favorites, movieId]);
@@ -27,6 +31,13 @@ function App() {
 
     const deleteFavorite = (movieId) => {
         setFavorites(favorites.filter((f) => f !== movieId));
+    };
+
+    const reOrderFavorites = (favs) => {
+        if (favs.length && favs.length > 0) {
+            setSaveFavorites(true);
+            setFavoritesDetails(favs);
+        }
     };
 
     const retrieveFavorites = useCallback(() => {
@@ -39,8 +50,20 @@ function App() {
         }
     }, [user]);
 
+    const retrieveDetailedFavorites = useCallback(() => {
+        var data = {
+            ids: [...favorites],
+        };
+        console.log({ retrieve: data });
+        MovieDataService.collectFavorites(data)
+            .then((response) => {
+                setFavoritesDetails(response.data);
+            })
+            .catch((e) => console.log(e));
+    }, [favorites]);
+
     const updateFavorites = useCallback(() => {
-        if (user) {
+        if (user && saveFavorites) {
             const data = {
                 _id: user.googleId,
                 favorites,
@@ -52,7 +75,7 @@ function App() {
                 })
                 .catch((e) => console.log(e));
         }
-    }, [user, favorites]);
+    }, [user, favorites, saveFavorites]);
 
     useEffect(() => {
         let loginData = JSON.parse(localStorage.getItem('login'));
@@ -72,8 +95,21 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if (user && saveFavorites) {
+            updateFavorites();
+            setSaveFavorites(false);
+        }
+    }, [user, favorites, saveFavorites, updateFavorites]);
+
+    useEffect(() => {
         retrieveFavorites();
     }, [retrieveFavorites]);
+
+    useEffect(() => {
+        if (user) {
+            retrieveDetailedFavorites();
+        }
+    }, [user, favorites]);
 
     useEffect(() => {
         updateFavorites();
@@ -157,7 +193,7 @@ function App() {
                             user ? (
                                 <FavoritesList
                                     user={user}
-                                    favorites={favorites}
+                                    favorites={favoritesDetails}
                                     updateFavorites={updateFavorites}
                                 />
                             ) : (
