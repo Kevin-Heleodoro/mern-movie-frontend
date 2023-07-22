@@ -1,76 +1,56 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
-import MovieDataService from '../../services/movies';
-import FavoriteDataService from '../../services/favorites';
 import './FavoritesList.css';
 import { DndCard } from './DndCard';
+import { ItemTypes } from './ItemTypes';
 
-const DEFAULT_IMAGE = require('../../img/default-poster.png');
+const style = {
+    width: 500,
+    margin: '1em',
+};
 
-const FavoritesList = ({ user, favorites, updateFavorites }) => {
-    const [favoriteRanking, setFavoriteRanking] = useState(favorites);
-    const [cards, setCards] = useState(favorites);
+const FavoritesList = ({ favoriteRankDetails }) => {
+    const [cards, setCards] = useState(favoriteRankDetails);
 
-    // useEffect(() => {
-    //     var data = {
-    //         ids: [...favorites],
-    //     };
-    //     MovieDataService.collectFavorites(data)
-    //         .then((response) => {
-    //             console.log(response.data);
-    //             setFavoriteRanking(response.data);
-    //         })
-    //         .catch((e) => console.log(e));
-    // }, []);
-
-    const findCard = useCallback(
-        (id) => {
-            const card = cards.filter((c) => `${c.id}` === id)[0];
-            return {
-                card,
-                index: cards.indexOf(card),
-            };
-        },
-        [cards]
-    );
-
-    const moveCard = useCallback(
-        (id, hoverIndex) => {
-            const { card, index } = findCard(id);
-            setFavoriteRanking(
-                update(cards, {
-                    $splice: [
-                        [index, 1],
-                        [hoverIndex, 0, card],
-                    ],
-                })
-            );
-        },
-        [findCard, favoriteRanking, setFavoriteRanking]
-    );
-
-    const renderCard = useCallback((card, index) => {
-        return (
-            <DndCard
-                key={card.id}
-                index={index}
-                id={`${card.id}`}
-                title={card.title}
-                poster={card.poster}
-                moveCard={moveCard}
-                findCard={findCard}
-            />
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        setCards((prevCards) =>
+            update(prevCards, {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, prevCards[dragIndex]],
+                ],
+            })
         );
     }, []);
 
     return (
         <>
             <div className="favoritesContainer container">
-                <div className="favoritesPanel">Drag to Rank</div>
+                <div className="favoritesPanel">
+                    Rank ME
+                    {/* {
+                        favoriteRanking.length > 1
+                        ? 
+                        'Drag to Rank'
+                        : 'You have not selected any favorites yet.'} */}
+                </div>
+
                 <div className="favoritesRankOrder">
-                    {favoriteRanking &&
-                        favoriteRanking.map((card, i) => renderCard(card, i))}
+                    <div style={style}>
+                        {favoriteRankDetails &&
+                            favoriteRankDetails.map((card, i) => (
+                                <DndCard
+                                    key={card._id}
+                                    id={card._id}
+                                    title={card.title}
+                                    poster={card.poster}
+                                    index={i}
+                                    moveCard={moveCard}
+                                />
+                            ))}
+                    </div>
                 </div>
             </div>
         </>

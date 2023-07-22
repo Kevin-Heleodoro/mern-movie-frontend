@@ -20,7 +20,6 @@ class MovieDataService {
     }
 
     collectFavorites(data) {
-        console.log({ data });
         return axios.post(`${BASE_URL}/collection`, data);
     }
 

@@ -1,4 +1,4 @@
-import React, { useRef, memo } from 'react';
+import React, { memo, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes.js';
 import Card from 'react-bootstrap/Card';
@@ -14,47 +14,55 @@ const style = {
 
 const DEFAULT_IMAGE = require('../../img/default-poster.png');
 
-export const DndCard = memo(function ({
-    id,
-    title,
-    poster,
-    index,
-    moveCard,
-    findCard,
-}) {
-    const originalRank = findCard(id).index;
+export const DndCard = ({ id, title, poster, index, moveCard }) => {
     const ref = useRef(null);
+    const [{ handlerId }, drop] = useDrop({
+        accept: ItemTypes.CARD,
+        collect(monitor) {
+            return {
+                handlerId: monitor.getHandlerId(),
+            };
+        },
+        hover(item, monitor) {
+            if (!ref.current) {
+                return;
+            }
 
-    const [, drop] = useDrop(
-        () => ({
-            accept: ItemTypes.CARD,
-            hover({ id: dragId }) {
-                if (dragId !== id) {
-                    const { index: overIndex } = findCard(id);
-                    moveCard(dragId, overIndex);
-                }
-            },
-        }),
-        [findCard, moveCard]
-    );
+            const dragIndex = item.index;
+            const hoverIndex = index;
 
-    const [{ isDragging }, drag] = useDrag(
-        () => ({
-            type: ItemTypes.CARD,
-            item: { id, originalRank },
-            collect: (monitor) => ({
-                isDragging: monitor.isDragging(),
-            }),
-            end: (item, monitor) => {
-                const { id: dropId, originalIndex } = item;
-                const didDrop = monitor.didDrop();
-                if (!didDrop) {
-                    moveCard(dropId, originalIndex);
-                }
-            },
-        }),
-        [id, originalRank, moveCard]
-    );
+            if (dragIndex === hoverIndex) {
+                return;
+            }
+
+            const hoverBoundingRect = ref.current?.getBoundingClientRect();
+            const hoverMiddleY =
+                hoverBoundingRect.bottom / hoverBoundingRect.top / 2;
+            const clientOffset = monitor.getClientOffset();
+            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                return;
+            }
+
+            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                return;
+            }
+
+            moveCard(dragIndex, hoverIndex);
+            item.index = hoverIndex;
+        },
+    });
+
+    const [{ isDragging }, drag] = useDrag({
+        type: ItemTypes.CARD,
+        item: () => {
+            return { id, index };
+        },
+        collect: (monitor) => {
+            isDragging: monitor.isDragging();
+        },
+    });
 
     const opacity = isDragging ? 0 : 1;
     const numberClassName =
@@ -62,22 +70,29 @@ export const DndCard = memo(function ({
             ? 'favoritesNumber favoritesNumberOneDigit'
             : 'favoritesNumber favoritesNumberTwoDigit';
 
+    drag(drop(ref));
     return (
-        <div ref={(n) => drag(drop(n))} style={{ ...style, opacity }}>
-            <Card className="favoritesCard" ref={ref} style={{ ...opacity }}>
+        <div
+            ref={ref}
+            style={{ ...style, opacity }}
+            data-handler-id={handlerId}
+            draggable={true}
+        >
+            <div className="favoritesCard card">
                 <div className={numberClassName}>{index + 1}</div>
                 <div>
-                    <Card.Img
-                        className="favoritesPoster"
+                    <img
+                        className="favoritesPoster card-img"
                         src={poster + '/100px180'}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
                             currentTarget.src = DEFAULT_IMAGE;
                         }}
+                        alt=""
                     />
                 </div>
                 <div className="favoritesTitle">{title}</div>
-            </Card>
+            </div>
         </div>
     );
-});
+};

@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Routes, Route, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import Container from 'react-bootstrap/Container';
 import { Navbar, Nav } from 'react-bootstrap';
 
@@ -14,7 +15,9 @@ import Movie from './components/Movie';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import AddReview from './components/AddReview';
+import { favoriteDetails } from './components/FavoritesList/DummyData';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -22,22 +25,18 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
-    const [favoritesDetails, setFavoritesDetails] = useState([]);
+    const [favoriteRankDetails, setFavoriteRankDetails] =
+        useState(favoriteDetails);
     const [saveFavorites, setSaveFavorites] = useState(false);
 
     const addFavorite = (movieId) => {
+        setSaveFavorites(true);
         setFavorites([...favorites, movieId]);
     };
 
     const deleteFavorite = (movieId) => {
+        setSaveFavorites(true);
         setFavorites(favorites.filter((f) => f !== movieId));
-    };
-
-    const reOrderFavorites = (favs) => {
-        if (favs.length && favs.length > 0) {
-            setSaveFavorites(true);
-            setFavoritesDetails(favs);
-        }
     };
 
     const retrieveFavorites = useCallback(() => {
@@ -49,18 +48,6 @@ function App() {
                 .catch((e) => console.log(e));
         }
     }, [user]);
-
-    const retrieveDetailedFavorites = useCallback(() => {
-        var data = {
-            ids: [...favorites],
-        };
-        console.log({ retrieve: data });
-        MovieDataService.collectFavorites(data)
-            .then((response) => {
-                setFavoritesDetails(response.data);
-            })
-            .catch((e) => console.log(e));
-    }, [favorites]);
 
     const updateFavorites = useCallback(() => {
         if (user && saveFavorites) {
@@ -104,12 +91,6 @@ function App() {
     useEffect(() => {
         retrieveFavorites();
     }, [retrieveFavorites]);
-
-    useEffect(() => {
-        if (user) {
-            retrieveDetailedFavorites();
-        }
-    }, [user, favorites]);
 
     useEffect(() => {
         updateFavorites();
@@ -191,11 +172,13 @@ function App() {
                         path="/favorites"
                         element={
                             user ? (
-                                <FavoritesList
-                                    user={user}
-                                    favorites={favoritesDetails}
-                                    updateFavorites={updateFavorites}
-                                />
+                                <DndProvider backend={HTML5Backend}>
+                                    <FavoritesList
+                                        favoriteRankDetails={
+                                            favoriteRankDetails
+                                        }
+                                    />
+                                </DndProvider>
                             ) : (
                                 <MoviesList
                                     user={user}
