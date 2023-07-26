@@ -15,7 +15,6 @@ import Movie from './components/Movie';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import AddReview from './components/AddReview';
-import { favoriteDetails } from './components/FavoritesList/DummyData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -25,8 +24,7 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
-    const [favoriteRankDetails, setFavoriteRankDetails] =
-        useState(favoriteDetails);
+    const [favoriteRankDetails, setFavoriteRankDetails] = useState([]);
     const [saveFavorites, setSaveFavorites] = useState(false);
 
     const addFavorite = (movieId) => {
@@ -40,29 +38,53 @@ function App() {
     };
 
     const retrieveFavorites = useCallback(() => {
-        if (user) {
-            FavoriteDataService.getAll(user.googleId)
-                .then((response) => {
-                    setFavorites(response.data.favorites);
-                })
-                .catch((e) => console.log(e));
-        }
+        FavoriteDataService.getAll(user.googleId)
+            .then((response) => {
+                setFavorites(response.data.favorites);
+            })
+            .catch((e) => console.log(e));
     }, [user]);
 
-    const updateFavorites = useCallback(() => {
-        if (user && saveFavorites) {
-            const data = {
-                _id: user.googleId,
-                favorites,
-            };
+    const retrieveFavoritesDetails = useCallback(() => {
+        let data = {
+            ids: [...favorites],
+        };
 
-            FavoriteDataService.updateFavorites(data)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((e) => console.log(e));
-        }
-    }, [user, favorites, saveFavorites]);
+        MovieDataService.collectFavorites(data)
+            .then((response) => {
+                setFavoriteRankDetails(response.data);
+            })
+            .catch((e) => console.log(e));
+    }, [favorites]);
+
+    const updateFavorites = useCallback(() => {
+        const data = {
+            _id: user.googleId,
+            favorites,
+        };
+
+        FavoriteDataService.updateFavorites(data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((e) => console.log(e));
+    }, [user, favorites]);
+
+    const reorderFavorites = useCallback(
+        (cards) => {
+            if (cards) {
+                const newFavoritesOrder = cards.map((f) => f._id);
+                console.log(favorites);
+                console.log(newFavoritesOrder);
+
+                setSaveFavorites(true);
+                setFavorites(newFavoritesOrder);
+                setFavoriteRankDetails(cards);
+                // updateFavorites()
+            }
+        },
+        [favorites, favoriteRankDetails]
+    );
 
     useEffect(() => {
         let loginData = JSON.parse(localStorage.getItem('login'));
@@ -89,12 +111,28 @@ function App() {
     }, [user, favorites, saveFavorites, updateFavorites]);
 
     useEffect(() => {
-        retrieveFavorites();
-    }, [retrieveFavorites]);
+        if (user) {
+            retrieveFavorites();
+        }
+    }, [user, retrieveFavorites]);
 
     useEffect(() => {
-        updateFavorites();
-    }, [updateFavorites]);
+        if (user) {
+            retrieveFavoritesDetails();
+        }
+    }, [user, retrieveFavoritesDetails]);
+
+    useEffect(() => {
+        if (user && saveFavorites) {
+            reorderFavorites();
+        }
+    }, [user, saveFavorites, reorderFavorites]);
+
+    useEffect(() => {
+        if (user && saveFavorites) {
+            updateFavorites();
+        }
+    }, [user, saveFavorites, updateFavorites]);
 
     return (
         <GoogleOAuthProvider clientId={clientId}>
@@ -177,6 +215,7 @@ function App() {
                                         favoriteRankDetails={
                                             favoriteRankDetails
                                         }
+                                        reorderFavorites={reorderFavorites}
                                     />
                                 </DndProvider>
                             ) : (

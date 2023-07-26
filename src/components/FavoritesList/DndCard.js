@@ -1,7 +1,6 @@
-import React, { memo, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes.js';
-import Card from 'react-bootstrap/Card';
 
 import './FavoritesList.css';
 
@@ -37,7 +36,7 @@ export const DndCard = ({ id, title, poster, index, moveCard }) => {
 
             const hoverBoundingRect = ref.current?.getBoundingClientRect();
             const hoverMiddleY =
-                hoverBoundingRect.bottom / hoverBoundingRect.top / 2;
+                (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
             const clientOffset = monitor.getClientOffset();
             const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
@@ -59,9 +58,9 @@ export const DndCard = ({ id, title, poster, index, moveCard }) => {
         item: () => {
             return { id, index };
         },
-        collect: (monitor) => {
-            isDragging: monitor.isDragging();
-        },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
     });
 
     const opacity = isDragging ? 0 : 1;

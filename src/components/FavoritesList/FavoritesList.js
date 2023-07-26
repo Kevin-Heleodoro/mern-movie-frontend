@@ -1,17 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
 import './FavoritesList.css';
 import { DndCard } from './DndCard';
-import { ItemTypes } from './ItemTypes';
 
 const style = {
     width: 500,
     margin: '1em',
 };
 
-const FavoritesList = ({ favoriteRankDetails }) => {
+const FavoritesList = ({ favoriteRankDetails, reorderFavorites }) => {
     const [cards, setCards] = useState(favoriteRankDetails);
 
     const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -23,24 +21,26 @@ const FavoritesList = ({ favoriteRankDetails }) => {
                 ],
             })
         );
+        reorderFavorites(cards);
     }, []);
+
+    // useEffect(() => {
+    //     reorderFavorites(cards);
+    // }, [cards]);
 
     return (
         <>
             <div className="favoritesContainer container">
                 <div className="favoritesPanel">
-                    Rank ME
-                    {/* {
-                        favoriteRanking.length > 1
-                        ? 
-                        'Drag to Rank'
-                        : 'You have not selected any favorites yet.'} */}
+                    {cards.length > 1
+                        ? 'Drag to Rank'
+                        : 'You have not selected any favorites yet.'}
                 </div>
 
                 <div className="favoritesRankOrder">
                     <div style={style}>
-                        {favoriteRankDetails &&
-                            favoriteRankDetails.map((card, i) => (
+                        {cards &&
+                            cards.map((card, i) => (
                                 <DndCard
                                     key={card._id}
                                     id={card._id}
